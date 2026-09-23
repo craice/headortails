@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cara ou Coroa</title>
+  <meta name="description" content="Jogue uma moeda: cara ou coroa?">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23f7c531' stroke='%232b2118' stroke-width='8'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Artes das faces, reutilizadas na moeda e no histórico via <use>. -->
+  <svg class="sprite" aria-hidden="true">
+    <symbol id="art-cara" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#2b2118" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+      <circle cx="28" cy="58" r="6" fill="#f28b6b" opacity="0.7"/>
+      <circle cx="72" cy="58" r="6" fill="#f28b6b" opacity="0.7"/>
+      <circle cx="37" cy="42" r="6" fill="#2b2118"/>
+      <circle cx="63" cy="42" r="6" fill="#2b2118"/>
+      <path d="M35 60 Q50 76 65 60" fill="none" stroke="#2b2118" stroke-width="6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="art-coroa" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#2b2118" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+      <path d="M28 66 L24 38 L39 51 L50 31 L61 51 L76 38 L72 66 Z" fill="#e0a21b" stroke="#2b2118" stroke-width="5" stroke-linejoin="round"/>
+      <rect x="27" y="64" width="46" height="9" rx="3" fill="#e0a21b" stroke="#2b2118" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="24" cy="35" r="4.5" fill="#2b2118"/>
+      <circle cx="50" cy="28" r="4.5" fill="#2b2118"/>
+      <circle cx="76" cy="35" r="4.5" fill="#2b2118"/>
+    </symbol>
+  </svg>
+
+  <main class="game">
+    <h1 class="title">Cara ou Coroa</h1>
+
+    <div class="coin-stage" id="coin-stage">
+      <div class="coin" id="coin" aria-hidden="true">
+        <div class="coin-face coin-face--cara">
+          <svg class="coin-art" viewBox="0 0 100 100"><use href="#art-cara"></use></svg>
+        </div>
+        <div class="coin-face coin-face--coroa">
+          <svg class="coin-art" viewBox="0 0 100 100"><use href="#art-coroa"></use></svg>
+        </div>
+      </div>
+    </div>
+
+    <p class="result" id="result" aria-live="polite">Clique no botão para jogar!</p>
+
+    <button class="flip-button" id="flip-button" type="button">Jogar moeda!</button>
+
+    <section class="history" aria-labelledby="history-title">
+      <h2 class="history-title" id="history-title">Últimos resultados</h2>
+      <ol class="history-list" id="history-list"></ol>
+    </section>
+  </main>
+
+  <noscript><p class="noscript">Este jogo precisa de JavaScript ativado para funcionar.</p></noscript>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

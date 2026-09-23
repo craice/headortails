@@ -1,0 +1,219 @@
+@font-face {
+  font-family: "Fredoka";
+  src: url("assets/fonts/fredoka-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("assets/fonts/fredoka-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f6efe1;          /* creme, fundo neutro */
+  --ink: #2b2118;         /* contornos e texto */
+  --muted: #7a6a58;       /* textos secundários */
+  --coin: #f7c531;        /* dourado da moeda */
+  --coin-dark: #e0a21b;   /* sombra do dourado */
+  --button: #e8553a;
+  --button-text: #fffaf0;
+  --outline: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Fredoka", system-ui, sans-serif;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.game {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 3rem);
+  font-weight: 700;
+}
+
+/* ---------- Moeda ---------- */
+
+.coin-stage {
+  padding-top: 16px;
+  perspective: 800px;
+}
+
+.coin-stage.is-tossing {
+  animation: toss 1500ms ease-in-out;
+}
+
+@keyframes toss {
+  0%, 100% { transform: translateY(0); }
+  45%      { transform: translateY(-70px); }
+}
+
+.coin {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  transform-style: preserve-3d;
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: var(--outline) solid var(--ink);
+  border-radius: 50%;
+  background: var(--coin);
+  box-shadow: inset -10px -10px 0 var(--coin-dark);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.coin-face--coroa {
+  transform: rotateY(180deg);
+}
+
+.coin-art {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Resultado e botão ---------- */
+
+.result {
+  margin: 0;
+  min-height: 1.3em;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.flip-button {
+  padding: 14px 36px;
+  border: var(--outline) solid var(--ink);
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 5px 5px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 100ms, box-shadow 100ms;
+}
+
+.flip-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.flip-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.flip-button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.flip-button:focus-visible {
+  outline: 3px dashed var(--ink);
+  outline-offset: 6px;
+}
+
+/* ---------- Histórico ---------- */
+
+.history {
+  width: 100%;
+}
+
+.history-title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.history-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-list:empty::before {
+  content: "Nenhuma jogada ainda";
+  color: var(--muted);
+}
+
+.history-item {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--coin);
+}
+
+.history-item svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Utilitários ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.noscript {
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coin-stage.is-tossing {
+    animation: none;
+  }
+}
