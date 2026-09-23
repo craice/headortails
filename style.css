@@ -75,7 +75,7 @@ body {
 
 @keyframes toss {
   0%, 100% { transform: translateY(0); }
-  45%      { transform: translateY(-70px); }
+  45%      { transform: translateY(-34px); }
 }
 
 .coin {

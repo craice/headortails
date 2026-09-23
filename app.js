@@ -1,6 +1,7 @@
 import { flipCoin } from './coin.js';
 
 const FLIP_DURATION_MS = 1500;
+const REDUCED_MOTION_DELAY_MS = 100;
 const MAX_HISTORY = 10;
 const FULL_SPINS = 5;
 const LABELS = { cara: 'Cara', coroa: 'Coroa' };
@@ -64,7 +65,10 @@ function flip() {
   coin.style.transform = `rotateY(${rotation}deg)`;
 
   if (!animate) {
-    showResult(result);
+    // Limpa o texto antes de mostrar o resultado: se o mesmo lado sair de novo,
+    // o conteúdo muda duas vezes e o leitor de tela reanuncia o resultado.
+    resultText.textContent = '';
+    setTimeout(() => showResult(result), REDUCED_MOTION_DELAY_MS);
     return;
   }
 
