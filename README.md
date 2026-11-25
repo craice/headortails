@@ -46,6 +46,7 @@ Este projeto não coleta nenhum dado: sem cookies, sem analytics, sem armazename
 
 ## Créditos
 
+- Feito por [Rafael Craice](https://craice.me).
 - Fonte [Fredoka](https://fonts.google.com/specimen/Fredoka), licenciada sob a SIL Open Font License (veja `assets/fonts/OFL.txt`).
 
 ## Licença
